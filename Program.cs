@@ -1,7 +1,12 @@
-﻿
-using System;
-using System.Collections.Generic;
-using RecipeFinderLibrary;
+﻿public class Program
+{
+    // Main class serves as the entry point of the program
+    static void Main(string[] args)
+    {
+        // Initialize components and start program execution
+        // Placeholder code
+    }
+}
 
 
 // Database class handles interactions with the database
@@ -28,7 +33,7 @@ public class Database
 
 
 // UserInterface class manages user interactions
-public class UserInterface
+/*public class UserInterface
 {
     // Placeholder methods for user interface interactions
     public void DisplayMainMenu() { }
@@ -43,24 +48,27 @@ public class UserInterface
     public void DisplayRecipeDetails(Recipe recipe) { }
     public void DisplayUserDashboard(User user) { }
 }
-
+*/
 // UserAuthenticationModule handles user authentication
+/*
 public class UserAuthenticationModule
 {
     // Placeholder methods for user authentication
     public string AuthenticateUser(string username, string password) { return ""; }
     //public string HashFunction(string password) { return ""; }
 }
-
+*/
 // UserRegistrationModule handles user registration
+/*
 public class UserRegistrationModule
 {
     // Placeholder methods for user registration
     public string RegisterUser(string username, string password) { return ""; }
     //public string HashFunction(string password) { return ""; }
 }
-
+*/
 // RecipeSearchModule handles recipe searching
+/*
 public class RecipeSearchModule
 {
     // Placeholder methods for recipe searching
@@ -70,14 +78,4 @@ public class RecipeSearchModule
     //public List<Recipe> SearchByCookingTime(int maxTime) { return null; }
     public List<Recipe> SearchBudgetConscious(double maxBudget) { return null; }
 }
-
-// Main class serves as the entry point of the program
-public class Program
-{
-    static void Main(string[] args)
-    {
-        // Initialize components and start program execution
-        // Placeholder code
-    }
-}
-
+*/
