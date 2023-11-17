@@ -16,4 +16,11 @@
     <ProjectReference Include="..\RecipeFinderLibrary\RecipeFinderLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="RecipeFinderGUI\RecipeFinderGUI.csproj" />
+    <None Include="RecipeFinderGUI\RecipeFinderGUI.csproj.user" />
+    <None Include="RecipeFinderLibraryTest\RecipeFinderLibraryTest.csproj" />
+    <None Include="RecipeFinderLibrary\RecipeFinderLibrary.csproj" />
+  </ItemGroup>
+
 </Project>
