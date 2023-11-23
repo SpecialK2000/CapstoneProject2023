@@ -32,6 +32,9 @@
             DashboardTitle = new Label();
             SearchForRecipesButton = new Button();
             pictureBox1 = new PictureBox();
+            adminAddRecipeButton = new Button();
+            adminDeleteRecipeButton = new Button();
+            logOutButton = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -56,6 +59,7 @@
             SearchForRecipesButton.TabIndex = 1;
             SearchForRecipesButton.Text = "Search For Recipes";
             SearchForRecipesButton.UseVisualStyleBackColor = false;
+            SearchForRecipesButton.Click += SearchForRecipesButton_Click;
             // 
             // pictureBox1
             // 
@@ -66,17 +70,57 @@
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             // 
+            // adminAddRecipeButton
+            // 
+            adminAddRecipeButton.BackColor = Color.Honeydew;
+            adminAddRecipeButton.Font = new Font("Constantia", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            adminAddRecipeButton.Location = new Point(222, 148);
+            adminAddRecipeButton.Name = "adminAddRecipeButton";
+            adminAddRecipeButton.Size = new Size(94, 29);
+            adminAddRecipeButton.TabIndex = 3;
+            adminAddRecipeButton.Text = "Add Recipe";
+            adminAddRecipeButton.UseVisualStyleBackColor = false;
+            adminAddRecipeButton.Click += button1_Click;
+            // 
+            // adminDeleteRecipeButton
+            // 
+            adminDeleteRecipeButton.BackColor = Color.LavenderBlush;
+            adminDeleteRecipeButton.Font = new Font("Constantia", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            adminDeleteRecipeButton.Location = new Point(416, 148);
+            adminDeleteRecipeButton.Name = "adminDeleteRecipeButton";
+            adminDeleteRecipeButton.Size = new Size(129, 29);
+            adminDeleteRecipeButton.TabIndex = 4;
+            adminDeleteRecipeButton.Text = "Delete Recipe";
+            adminDeleteRecipeButton.UseVisualStyleBackColor = false;
+            adminDeleteRecipeButton.Click += button2_Click;
+            // 
+            // logOutButton
+            // 
+            logOutButton.BackColor = Color.FromArgb(192, 192, 255);
+            logOutButton.Font = new Font("Constantia", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            logOutButton.Location = new Point(682, 12);
+            logOutButton.Name = "logOutButton";
+            logOutButton.Size = new Size(94, 29);
+            logOutButton.TabIndex = 5;
+            logOutButton.Text = "Log Out";
+            logOutButton.UseVisualStyleBackColor = false;
+            logOutButton.Click += logOutButton_Click;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FloralWhite;
             ClientSize = new Size(800, 450);
+            Controls.Add(logOutButton);
+            Controls.Add(adminDeleteRecipeButton);
+            Controls.Add(adminAddRecipeButton);
             Controls.Add(pictureBox1);
             Controls.Add(SearchForRecipesButton);
             Controls.Add(DashboardTitle);
             Name = "DashboardForm";
             Text = "DashboardForm";
+            Load += DashboardForm_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -87,5 +131,8 @@
         private Label DashboardTitle;
         private Button SearchForRecipesButton;
         private PictureBox pictureBox1;
+        private Button adminAddRecipeButton;
+        private Button adminDeleteRecipeButton;
+        private Button logOutButton;
     }
 }

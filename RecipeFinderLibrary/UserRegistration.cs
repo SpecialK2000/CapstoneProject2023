@@ -26,7 +26,14 @@
             {
                 return false; // Username already exists
             }
+            // Username lookup, return error if exists
+            // select count (*) from table where username = User input
+            // if count > 0 throw error, else...
 
+
+
+            //else
+            //{
             // Create a new User object with plain password
             User newUser = new User
             {
@@ -36,7 +43,7 @@
 
             // Save the user to the database
             database.SaveUser(newUser);
-
+            //}
             return true;
         }
     }

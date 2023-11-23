@@ -2,18 +2,18 @@
 {
     public class UserDataHandler
     {
-        public User AddSavedRecipeToUser(string recipe, User user)
-        {
-            user.SavedRecipes.Add(recipe);
+        //public User AddSavedRecipeToUser(string recipe, User user)
+        //{
+        //    user.SavedRecipes.Add(recipe);
 
-            return user;
-        }
+        //    return user;
+        //}
 
-        public User RemoveSavedRecipeFromUser(string recipe, User user)
-        {
-            user.SavedRecipes.Remove(recipe);
+        //public User RemoveSavedRecipeFromUser(string recipe, User user)
+        //{
+        //    user.SavedRecipes.Remove(recipe);
 
-            return user;
-        }
+        //    return user;
+        //}
     }
 }

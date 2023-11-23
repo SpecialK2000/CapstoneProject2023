@@ -22,7 +22,7 @@
 
             // Retrieve the user from the database
             User user = database.QueryByUsername(username,password);
-
+            
             // Check if user exists and the password matches
             if (!string.IsNullOrEmpty(user.Username))
             {

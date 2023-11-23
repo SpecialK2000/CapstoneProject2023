@@ -13,7 +13,7 @@ namespace RecipeFinderLibrary
 
     public partial class RecipeDatabase
     {
-        //public Recipe QueryRecipeByName(string name) { return null; }
+        
         public void SaveRecipe(Recipe recipe) { }
         public void RemoveRecipe(Recipe recipe) { }
         public List<Recipe> QueryRecipesByDietaryRestrictions(List<string> restrictions) { return null; }
@@ -24,7 +24,7 @@ namespace RecipeFinderLibrary
     }
 
 
-    // test 2 commit and pull request
+
 
 
     public class Database
@@ -37,10 +37,11 @@ namespace RecipeFinderLibrary
             conn = GetConnection();
         }
 
-        private SqlConnection GetConnection()
+        public SqlConnection GetConnection()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = "DESKTOP-M6OUQ58\\SQLEXPRESS"; // Or your SQL Server address
+            //builder.DataSource = "DESKTOP-M6OUQ58\\SQLEXPRESS"; // Or your SQL Server address
+            builder.DataSource = "(local)\\SQLEXPRESS";
             builder.UserID = "capstone_user";
             builder.Password = "pass@word1";
             builder.InitialCatalog = "Recipe/UserDatabase";
@@ -50,7 +51,8 @@ namespace RecipeFinderLibrary
 
         public User QueryByUsername(string username, string password)
         {
-            var sqlQuery = "SELECT TOP 1 * FROM dbo.[user] WHERE Username = @username AND Password = @password";
+            var sqlQuery = "SELECT TOP 1 * FROM dbo.[user] WHERE Username = '" + @username + "' AND Password = '" + @password + "'";
+
             conn.Open();
             using (var cmd = new SqlCommand(sqlQuery, conn))
             {
@@ -64,6 +66,7 @@ namespace RecipeFinderLibrary
                     {
                         user.Username = username;
                         user.Password = password;
+                        user.IsAdmin = (bool) reader[2];
                     }
                 }
                 

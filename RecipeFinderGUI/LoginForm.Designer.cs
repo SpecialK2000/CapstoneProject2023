@@ -40,21 +40,25 @@
             // usernameLabel1
             // 
             usernameLabel1.AutoSize = true;
-            usernameLabel1.Location = new Point(422, 129);
+            usernameLabel1.Font = new Font("Constantia", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            usernameLabel1.Location = new Point(235, 129);
             usernameLabel1.Name = "usernameLabel1";
-            usernameLabel1.Size = new Size(75, 20);
+            usernameLabel1.Size = new Size(74, 18);
             usernameLabel1.TabIndex = 1;
             usernameLabel1.Text = "Username";
+            usernameLabel1.Visible = false;
             usernameLabel1.Click += usernameLabel1_Click;
             // 
             // passwordLabel1
             // 
             passwordLabel1.AutoSize = true;
-            passwordLabel1.Location = new Point(427, 193);
+            passwordLabel1.Font = new Font("Constantia", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            passwordLabel1.Location = new Point(235, 193);
             passwordLabel1.Name = "passwordLabel1";
-            passwordLabel1.Size = new Size(70, 20);
+            passwordLabel1.Size = new Size(70, 18);
             passwordLabel1.TabIndex = 2;
             passwordLabel1.Text = "Password";
+            passwordLabel1.Visible = false;
             passwordLabel1.Click += passwordLabel1_Click;
             // 
             // FormTitle
@@ -70,14 +74,15 @@
             // 
             // usernameTextBox
             // 
-            usernameTextBox.Location = new Point(235, 126);
+            usernameTextBox.Location = new Point(376, 122);
             usernameTextBox.Name = "usernameTextBox";
             usernameTextBox.Size = new Size(125, 27);
             usernameTextBox.TabIndex = 4;
+            usernameTextBox.TextChanged += usernameTextBox_TextChanged;
             // 
             // passwordTextBox
             // 
-            passwordTextBox.Location = new Point(235, 190);
+            passwordTextBox.Location = new Point(376, 186);
             passwordTextBox.Name = "passwordTextBox";
             passwordTextBox.Size = new Size(125, 27);
             passwordTextBox.TabIndex = 5;
@@ -85,19 +90,19 @@
             // LoginButton
             // 
             LoginButton.BackColor = Color.FromArgb(192, 192, 255);
-            LoginButton.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LoginButton.Font = new Font("Constantia", 9F, FontStyle.Bold, GraphicsUnit.Point);
             LoginButton.Location = new Point(313, 279);
             LoginButton.Name = "LoginButton";
             LoginButton.Size = new Size(125, 29);
             LoginButton.TabIndex = 6;
             LoginButton.Text = "Login";
             LoginButton.UseVisualStyleBackColor = false;
-            LoginButton.Click += LogIn_SignUp_Click;
+            LoginButton.Click += LogInButton_Click;
             // 
             // SignUpButton
             // 
             SignUpButton.BackColor = Color.FromArgb(192, 192, 255);
-            SignUpButton.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            SignUpButton.Font = new Font("Constantia", 9F, FontStyle.Bold, GraphicsUnit.Point);
             SignUpButton.Location = new Point(313, 328);
             SignUpButton.Name = "SignUpButton";
             SignUpButton.Size = new Size(125, 29);
