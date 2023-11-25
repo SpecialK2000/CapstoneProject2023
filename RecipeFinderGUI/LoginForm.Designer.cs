@@ -59,7 +59,6 @@
             passwordLabel1.TabIndex = 2;
             passwordLabel1.Text = "Password";
             passwordLabel1.Visible = false;
-            passwordLabel1.Click += passwordLabel1_Click;
             // 
             // FormTitle
             // 

@@ -5,6 +5,8 @@ namespace RecipeFinderGUI
 {
     public partial class LoginForm : Form
     {
+
+        private DashboardForm dashboardForm;
         public LoginForm()
         {
             InitializeComponent();
@@ -29,23 +31,11 @@ namespace RecipeFinderGUI
             var userAuthentication = new UserAuthentication(database);
             try
             {
-                //todo remove this before you turn it in!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                //usernameTextBox.Text = "Test652";
-                //passwordTextBox.Text = "Test652";
-
                 var authenticatedUser = userAuthentication.Login(usernameTextBox.Text, passwordTextBox.Text);
                 if (!string.IsNullOrEmpty(authenticatedUser.Username))
                 {
-                    AuthenticatedUser.User = authenticatedUser;
-                    this.Hide();
-
-                    var dashboardForm = new DashboardForm();
-                    dashboardForm.ShowDialog();
-
-                    this.Close();
+                    ShowDashboard(authenticatedUser);
                 }
-                
-
             }
             catch (UnauthorizedAccessException loginFailed)
             {
@@ -56,27 +46,28 @@ namespace RecipeFinderGUI
             {
                 //ToDo display message within ex.Message
             }
+        }
 
-            
+        private void ShowDashboard(User authenticatedUser)
+        {
+            AuthenticatedUser.User = authenticatedUser;
+            this.Hide();
 
-            //new DashboardForm().ShowDialog(); Modal way, keeps both forms open.
+            var dashboardForm = new DashboardForm();
+            dashboardForm.ShowDialog();
 
-            // homeowrk 1 - figure out how to close the original login form.
-            // This way hides the current form, opens the dashboard form and then closes after
-            // the dashboard form is closed.
-
+            //this.Close();
         }
 
         private void SignUpButton_Click(object sender, EventArgs e)
         {
             var database = new Database();
             var userRegistration = new UserRegistration(database);
-            userRegistration.RegisterUser(usernameTextBox.Text, passwordTextBox.Text);
-        }
-
-        private void passwordLabel1_Click(object sender, EventArgs e)
-        {
-
+            var authenticatedUser = userRegistration.RegisterUser(usernameTextBox.Text, passwordTextBox.Text);
+            if (!string.IsNullOrEmpty(authenticatedUser.Username))
+            {
+                ShowDashboard(authenticatedUser);
+            }
         }
 
         private void usernameTextBox_TextChanged(object sender, EventArgs e)

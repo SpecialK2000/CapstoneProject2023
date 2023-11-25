@@ -2,6 +2,7 @@
 {
     public partial class DashboardForm : Form
     {
+        private SearchForm searchForm;
         public DashboardForm()
         {
             InitializeComponent();
@@ -26,7 +27,7 @@
             var SearchForm = new SearchForm();
             SearchForm.ShowDialog();
 
-            this.Close();
+            //this.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)

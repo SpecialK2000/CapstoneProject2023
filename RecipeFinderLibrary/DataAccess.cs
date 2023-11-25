@@ -12,10 +12,7 @@ namespace RecipeFinderGUI
 {
     public class DataAccess
     {
-        private static string connectionString = "Data Source=../../../RecipeFinder.db;Version=3;";
-        //This was from when connection was SQLite based, do I delete this? 
-
-
+ 
         public static string ExecuteScalarQuery(string query)
         {
             var database = new Database();
@@ -41,34 +38,35 @@ namespace RecipeFinderGUI
 
         public static T ExecuteQuery<T>(string query) where T : new()
         {
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            var database = new Database();
+            var connection = database.GetConnection();
+
+            connection.Open();
+
+            using (SqlCommand command = new SqlCommand(query, connection))
             {
-                connection.Open();
-
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SqlDataReader reader = command.ExecuteReader())
                 {
-                    using (SqlDataReader reader = command.ExecuteReader())
+                    if (reader.Read())
                     {
-                        if (reader.Read())
+                        T result = new T();
+
+                        for (int i = 0; i < reader.FieldCount; i++)
                         {
-                            T result = new T();
+                            string propertyName = reader.GetName(i);
+                            PropertyInfo property = typeof(T).GetProperty(propertyName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
 
-                            for (int i = 0; i < reader.FieldCount; i++)
+                            if (property != null && !reader.IsDBNull(i))
                             {
-                                string propertyName = reader.GetName(i);
-                                PropertyInfo property = typeof(T).GetProperty(propertyName, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance);
-
-                                if (property != null && !reader.IsDBNull(i))
-                                {
-                                    object value = Convert.ChangeType(reader.GetValue(i), property.PropertyType);
-                                    property.SetValue(result, value);
-                                }
+                                object value = Convert.ChangeType(reader.GetValue(i), property.PropertyType);
+                                property.SetValue(result, value);
                             }
-
-                            return result;
                         }
+
+                        return result;
                     }
                 }
+
             }
 
             return default(T);
@@ -113,4 +111,3 @@ namespace RecipeFinderGUI
         }
     }
 }
-

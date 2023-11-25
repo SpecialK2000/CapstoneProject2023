@@ -107,8 +107,8 @@
             recipeDataGrid.RowTemplate.Height = 29;
             recipeDataGrid.Size = new Size(674, 293);
             recipeDataGrid.TabIndex = 4;
+            recipeDataGrid.CellContentClick += recipeDataGrid_CellContentClick;
             recipeDataGrid.CellDoubleClick += recipeDataGrid_CellDoubleClick;
-            //recipeDataGrid.DoubleClick += recipeDataGrid_DoubleClick;
             // 
             // RecipeSearchButton
             // 

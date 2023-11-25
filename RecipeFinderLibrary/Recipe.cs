@@ -18,6 +18,7 @@ namespace RecipeFinderLibrary
         public string DietaryRestrictions { get; set; }
         public string CookingTime { get; set; }
         public int Cost { get; set; }
+        public int pk { get; set; }
         public string Instructions { get; set; }
 
         
@@ -33,9 +34,9 @@ namespace RecipeFinderLibrary
    
     public static class RecipeModel
     {
-        public static Recipe GetRecipe()
+        public static Recipe GetRecipe(int pk)
         {
-            string query = "SELECT Name, Ingredients, DietaryRestrictions, CookingTime, Instructions, Cost FROM Recipe;"; // Assuming User class has 'username' and 'password' properties
+            string query = "SELECT * FROM recipes where pk=" + pk;
 
             Recipe recipe = DataAccess.ExecuteQuery<Recipe>(query);
 
@@ -45,7 +46,7 @@ namespace RecipeFinderLibrary
         {
             DataAccess da = new DataAccess();
 
-            string query = "select distinct DietaryRestrictions from recipes group by DietaryRestrictions";
+            string query = "SELECT distinct DietaryRestrictions FROM recipes GROUP BY DietaryRestrictions";
 
             List<Recipe> recipes = da.ExecuteQueryList<Recipe>(query);
 
@@ -82,5 +83,7 @@ namespace RecipeFinderLibrary
 
             return recipes;
         }
+
+ 
     }
 }

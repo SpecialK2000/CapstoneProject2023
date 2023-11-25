@@ -12,7 +12,7 @@
             database = db;
         }
 
-        public bool RegisterUser(string username, string password)
+        public User RegisterUser(string username, string password)
         {
             // Validate username and password (basic validation for example purposes)
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -24,17 +24,9 @@
             var user = database.QueryByUsername(username, password);
             if (!string.IsNullOrEmpty(user.Username))
             {
-                return false; // Username already exists
+                return new User(); // Username already exists
             }
-            // Username lookup, return error if exists
-            // select count (*) from table where username = User input
-            // if count > 0 throw error, else...
 
-
-
-            //else
-            //{
-            // Create a new User object with plain password
             User newUser = new User
             {
                 Username = username,
@@ -43,8 +35,7 @@
 
             // Save the user to the database
             database.SaveUser(newUser);
-            //}
-            return true;
+            return newUser;
         }
     }
 }

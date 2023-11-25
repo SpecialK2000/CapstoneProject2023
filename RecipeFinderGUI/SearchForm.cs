@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using RecipeFinderLibrary;
+﻿using RecipeFinderLibrary;
 
 
 namespace RecipeFinderGUI
@@ -17,6 +6,7 @@ namespace RecipeFinderGUI
     public partial class SearchForm : Form
     {
         private RecipeSearch recipeSearch;
+        private DashboardForm dashboardForm;
 
         public SearchForm()
         {
@@ -42,16 +32,11 @@ namespace RecipeFinderGUI
 
             var myreturn = RecipeModel.GetDietaryRestrictionList();
 
-            DietaryRestrictionComboBox.DataBindings.Clear();
-            DietaryRestrictionComboBox.DataBindings.Add("Text",
-                                myreturn,
-                                "DietaryRestrictions",
-                                false,
-                                DataSourceUpdateMode.OnPropertyChanged);
-
-
-
-
+            DietaryRestrictionComboBox.Items.Clear();
+            foreach (var item in myreturn)
+            {
+                DietaryRestrictionComboBox.Items.Add(item.DietaryRestrictions);
+            }
         }
 
 
@@ -61,8 +46,8 @@ namespace RecipeFinderGUI
 
             if (budgetRadioButton.Checked)
             {
-                int priceFrom = int.Parse(priceRangeFromText.Text);
-                int priceTo = int.Parse(priceRangeToText.Text);
+                int priceFrom = string.IsNullOrEmpty(priceRangeFromText.Text) ? 0 : int.Parse(priceRangeFromText.Text);
+                int priceTo = string.IsNullOrEmpty(priceRangeToText.Text) ? Int32.MaxValue : int.Parse(priceRangeToText.Text);
 
                 myreturn = RecipeModel.GetByBudget(priceFrom, priceTo);
             }
@@ -79,6 +64,7 @@ namespace RecipeFinderGUI
             }
 
             recipeDataGrid.DataSource = myreturn;
+           
             recipeDataGrid.AutoGenerateColumns = false;
             if (recipeDataGrid.Columns.Contains(nameof(Recipe.CookingTime)))
             {
@@ -86,6 +72,7 @@ namespace RecipeFinderGUI
                 recipeDataGrid.Columns.Remove(nameof(Recipe.DietaryRestrictions));
                 recipeDataGrid.Columns.Remove(nameof(Recipe.Ingredients));
                 recipeDataGrid.Columns.Remove(nameof(Recipe.Instructions));
+                recipeDataGrid.Columns[nameof(Recipe.pk)].Visible = false;
             }
         }
 
@@ -137,7 +124,7 @@ namespace RecipeFinderGUI
                 if (recipe != null)
                 {
                     // Open the Recipe Details Form and pass the selected recipe
-                    var ViewRecipeDetailsForm = new ViewRecipeDetailsForm();
+                    var ViewRecipeDetailsForm = new ViewRecipeDetailsForm(recipe);
                     ViewRecipeDetailsForm.Show();
 
                 }
@@ -151,9 +138,22 @@ namespace RecipeFinderGUI
 
         private void returnToDashboardFromSearchForm_Click(object sender, EventArgs e)
         {
+            //this.Close();
+            //this.Close();
+            //this.Dispose();
 
+            this.Hide();
+            var DashboardForm = new DashboardForm();
+            DashboardForm.ShowDialog();
+
+            //this.Hide();
+            //dashboardForm.Show();
+            //this.Close();
         }
 
-        
+        private void recipeDataGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            Console.WriteLine();
+        }
     }
 }

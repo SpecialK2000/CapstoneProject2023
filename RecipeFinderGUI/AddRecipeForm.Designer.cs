@@ -75,6 +75,7 @@
             recipeNameTextbox.Name = "recipeNameTextbox";
             recipeNameTextbox.Size = new Size(125, 27);
             recipeNameTextbox.TabIndex = 2;
+            recipeNameTextbox.TextChanged += recipeNameTextbox_TextChanged;
             // 
             // ingredientsLabel
             // 
@@ -170,6 +171,7 @@
             costTextbox.Name = "costTextbox";
             costTextbox.Size = new Size(125, 27);
             costTextbox.TabIndex = 13;
+            costTextbox.TextChanged += costTextbox_TextChanged;
             // 
             // descriptionTextbox
             // 

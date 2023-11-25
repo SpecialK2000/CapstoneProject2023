@@ -3,25 +3,25 @@ using System.Collections.Generic;
 
 namespace RecipeFinderLibrary
 {
-    public partial class UserDatabase
-    {
-        // Placeholder methods for database interactions
-        public bool IsUsernameTaken(string username) { return false; }
-        public void SaveUser(User user) { }
-        public User QueryUserByUsername(string username) { return null; }
-    }
+    //public partial class UserDatabase
+    //{
+    //    // Placeholder methods for database interactions
+    //    public bool IsUsernameTaken(string username) { return false; }
+    //    public void SaveUser(User user) { }
+    //    public User QueryUserByUsername(string username) { return null; }
+    //}
 
-    public partial class RecipeDatabase
-    {
+    //public partial class RecipeDatabase
+    //{
         
-        public void SaveRecipe(Recipe recipe) { }
-        public void RemoveRecipe(Recipe recipe) { }
-        public List<Recipe> QueryRecipesByDietaryRestrictions(List<string> restrictions) { return null; }
-        public List<Recipe> QueryBudgetConsciousRecipes(double maxBudget) { return null; }
-        public void SaveUserRecipe(User user, Recipe recipe) { }
-        public void RemoveUserRecipe(User user, Recipe recipe) { }
-        public List<Recipe> GetSavedRecipesForUser(User user) { return null; }
-    }
+    //    public void SaveRecipe(Recipe recipe) { }
+    //    public void RemoveRecipe(Recipe recipe) { }
+    //    public List<Recipe> QueryRecipesByDietaryRestrictions(List<string> restrictions) { return null; }
+    //    public List<Recipe> QueryBudgetConsciousRecipes(double maxBudget) { return null; }
+    //    public void SaveUserRecipe(User user, Recipe recipe) { }
+    //    public void RemoveUserRecipe(User user, Recipe recipe) { }
+    //    public List<Recipe> GetSavedRecipesForUser(User user) { return null; }
+    //}
 
 
 
@@ -40,7 +40,6 @@ namespace RecipeFinderLibrary
         public SqlConnection GetConnection()
         {
             SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            //builder.DataSource = "DESKTOP-M6OUQ58\\SQLEXPRESS"; // Or your SQL Server address
             builder.DataSource = "(local)\\SQLEXPRESS";
             builder.UserID = "capstone_user";
             builder.Password = "pass@word1";
@@ -91,11 +90,15 @@ namespace RecipeFinderLibrary
         public void SaveRecipe(Recipe recipe)// Does this method save a recipe to the database or save to a user library? Ask Kevin.
         {
             conn.Open();
-            using (var cmd = new SqlCommand("INSERT INTO Recipes (Name, Ingredients, CookTime) VALUES (@name, @ingredients, @cookTime)", conn))
+            using (var cmd = new SqlCommand("INSERT INTO dbo.recipes (Name, Ingredients, DietaryRestrictions, CookingTime, Instructions, Cost, Description) VALUES (@name, @ingredients, @dietaryrestrictions, @cookingTime, @instructions, @cost, @description)", conn))
             {
                 cmd.Parameters.AddWithValue("@name", recipe.Name);
                 cmd.Parameters.AddWithValue("@ingredients", recipe.Ingredients);
+                cmd.Parameters.AddWithValue("@dietaryrestrictions", recipe.DietaryRestrictions);
                 cmd.Parameters.AddWithValue("@cookingTime", recipe.CookingTime);
+                cmd.Parameters.AddWithValue("@instructions", recipe.Instructions);
+                cmd.Parameters.AddWithValue("@cost", recipe.Cost);
+                cmd.Parameters.AddWithValue("@description", recipe.Description);
                 cmd.ExecuteNonQuery();
                 conn.Close();
             }
